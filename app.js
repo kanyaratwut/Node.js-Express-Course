@@ -1,23 +1,28 @@
-const express = require('express');
-const chalk = require('chalk');
-const debug = require('debug')('app');
-const morgan = require('morgan');
-const path = require('path');
+const express = require("express");
+const chalk = require("chalk");
+const debug = require("debug")("app");
+const morgan = require("morgan");
+const path = require("path");
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT;
 
-console.log('Serving static from: ', path.join(__dirname, 'public'));
+app.use(morgan("combined"));
+app.use(express.static(path.join(__dirname, "/public/"))); //เรียกใช้ path ไปหาไฟล์ public
 
+//set ejs
+app.set("views", "./src/views");
+app.set("view engine", "ejs");
 
-app.use(morgan('combined'));
-app.use(express.static(path.join(__dirname, 'public'))); //เรียกใช้ path ไปหาไฟล์ public
+app.get("/", (req, res) => {
 
+//   res.send("Hello Kanyarat!"); //ตัว static ไม่ทำงานจะมาแสดงผลตรงนี้ (่ตัว static คือ public ที่ index.js)
 
-app.get('/', (req, res) => {
-    res.send('Hello Kanyarat!');
+//ejs จะเขียนแบบนี้
+res.render("index", {username: "Kanyarat" , customers: ["sompop", "chanom", "snowy"]});
+
 }); //ใช้สำหรับจัดการ request ที่เข้ามาหน้า / จะส่งอะไรกลับไป
 
-app.listen(port, () => {
-    debug(`Example app listening at ` + chalk.green(port));
-}); //รอฟังที่ port ที่กําหนด
+app.listen(PORT, () => {
+  debug(`Example app listening at ` + chalk.green(PORT));
+}); //รอฟังที่ PORT ที่กําหนด
