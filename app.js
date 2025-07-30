@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
   //   res.send("Hello Kanyarat!"); //ตัว static ไม่ทำงานจะมาแสดงผลตรงนี้ (่ตัว static คือ public ที่ index.js)
 
   //ejs จะเขียนแบบนี้
-  res.render("index", {
+  res.render("index.ejs", {
     username: "Kanyarat",
     customers: ["sompop", "chanom", "snowy"],
   });
