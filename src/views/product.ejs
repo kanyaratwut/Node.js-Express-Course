@@ -5,14 +5,12 @@
   <body>
     <section class="pb-8 pt-20 dark:bg-dark lg:pb-[70px] lg:pt-[120px]">
       <div class="container px-4 mx-auto">
-        <h1>Products</h1>
-        <%products.map((product) => { %>
+        <h1>Product Detail</h1>
         <h4>
           <a href="/products/<%=product.id%>"><%=product.productTitle%></a>
         </h4>
         <p><%=product.productDesc%></p>
         <p>ราคา : <%=product.productPrice%></p>
-        <% })%>
       </div>
     </section>
   </body>
